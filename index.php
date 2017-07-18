@@ -1,4 +1,5 @@
 <?php
+require 'config.php';
 ?>
 <html>
 <head>
@@ -15,11 +16,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Module Registration</a>
+            <a class="navbar-brand" href="#">Registration</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#">Student</a></li>
+                <li><a href="<?php echo ROOT_URL; ?>">Student</a></li>
                 <li><a href="#">Lecturer</a></li>
             </ul>
         </div><!--/.nav-collapse -->
@@ -52,9 +53,32 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputLastName" class="col-lg-2 control-label">Last Name</label>
+                <label for="inputSID" class="col-lg-2 control-label">SID</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
+                    <input type="text" class="form-control" id="inputSID" placeholder="SID">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="select" class="col-lg-2 control-label">Time Slot</label>
+                <div class="col-lg-10">
+                    <select class="form-control" id="select">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="reset" class="btn btn-default">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
         </fieldset>
