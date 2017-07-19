@@ -1,5 +1,39 @@
 <?php
 require 'config.php';
+require 'db.php';
+// Error message variables
+$msg = '';
+$msgClass = '';
+// Check for submit
+if (filter_has_var(INPUT_POST, 'submit')){
+    // Get data from the form
+    $sid = mysqli_real_escape_string($conn, $_POST['sid']);
+    $firstName = mysqli_real_escape_string($conn, $_POST['first_name']);
+    $lastName = mysqli_real_escape_string($conn, $_POST['last_name']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $timeSlot = mysqli_real_escape_string($conn, $_POST['time_slot']);
+
+    // Check required field
+    if (!empty($sid) && !empty($firstName) && !empty($lastName) && !empty($email) && !empty($timeSlot)){
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+            $msg = 'Please enter a valid email address';
+            $msgClass = 'alert-danger';
+        } else {
+            $query = "INSERT INTO students(SID, first_name, last_name, email, time_slot) VALUES('$sid', '$firstName', '$lastName', '$email', '$timeSlot')";
+            if (mysqli_query($conn, $query)){
+                $msg = 'You registered at '.$timeSlot.' successfully.';
+                $msgClass = 'alert-success';
+            } else {
+                $msg = 'ERROR: '.mysqli_error($conn);
+                $msgClass = 'alert-danger';
+            }
+        }
+    } else {
+        $msg = 'Please fill in all fields';
+        $msgClass = 'alert-danger';
+    }
+
+}
 ?>
 <html>
 <head>
@@ -38,47 +72,50 @@ require 'config.php';
             <li>Any problem? Send a message to <a href="#">Administrator</a></li>
         </ul>
     </div>
+    <?php if ($msg !=''): ?>
+        <div class="alert <?php echo $msgClass; ?>"><?php echo $msg; ?></div>
+    <?php endif; ?>
     <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>" class="form-horizontal">
         <fieldset>
             <div class="form-group">
                 <label for="inputFirstName" class="col-lg-2 control-label">First Name</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputFirstName" placeholder="First Name">
+                    <input type="text" class="form-control" id="inputFirstName" name="first_name" placeholder="First Name">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputLastName" class="col-lg-2 control-label">Last Name</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
+                    <input type="text" class="form-control" id="inputLastName" name="last_name" placeholder="Last Name">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputSID" class="col-lg-2 control-label">SID</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputSID" placeholder="SID">
+                    <input type="text" class="form-control" id="inputSID" name="sid" placeholder="SID">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail" class="col-lg-2 control-label">Email</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+                    <input type="text" class="form-control" id="inputEmail" name="email" placeholder="Email">
                 </div>
             </div>
             <div class="form-group">
                 <label for="select" class="col-lg-2 control-label">Time Slot</label>
                 <div class="col-lg-10">
-                    <select class="form-control" id="select">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                    <select class="form-control" id="select" name="time_slot">
+                        <option>Wednesday, July 5th, 2:00pm - 4:00pm</option>
+                        <option>Wednesday, July 19th, 2:00pm - 4:00pm</option>
+                        <option>Wednesday, August 2nd, 2:00pm - 4:00pm</option>
+                        <option>Wednesday, August 16th, 2:00pm - 4:00pm</option>
                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
                     <button type="reset" class="btn btn-default">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
         </fieldset>
