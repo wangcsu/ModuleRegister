@@ -118,7 +118,7 @@ mysqli_close($conn);
             <li>Please enter a correct 'SID' number.</li>
             <li>Please check the number of available slots before submitting.</li>
             <li>Register only to one slot.</li>
-            <li>Any problem? Send a message to <a href="#">Administrator</a></li>
+            <li>Any problem? Send a message to <a href="<?php echo ROOT_URL; ?>message.php">Administrator</a></li>
         </ul>
     </div>
     <?php if ($msg !=''): ?>
