@@ -102,6 +102,11 @@ if (filter_has_var(INPUT_POST, 'submit')){
     }
 
 }
+// Free result
+mysqli_free_result($result);
+
+// Close connection
+mysqli_close($conn);
 ?>
 <?php include('header.php'); ?>
 <div class="container">
