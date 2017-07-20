@@ -103,31 +103,7 @@ if (filter_has_var(INPUT_POST, 'submit')){
 
 }
 ?>
-<html>
-<head>
-    <title>Register</title>
-    <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css">
-</head>
-<body>
-<nav class="navbar navbar-default">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Registration</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="<?php echo ROOT_URL; ?>">Student</a></li>
-                <li><a href="#">Lecturer</a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</nav>
+<?php include('header.php'); ?>
 <div class="container">
     <h3>Module Demonstrations - Register here for a time slot</h3>
     <div class="well">
@@ -189,7 +165,4 @@ if (filter_has_var(INPUT_POST, 'submit')){
         </fieldset>
     </form>
 </div>
-<script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</body>
-</html>
+<?php include('footer.php'); ?>
